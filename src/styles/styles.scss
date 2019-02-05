@@ -1,0 +1,32 @@
+/* this file will be extracted to main dist folder and is imported in index.html */
+/* This file is for setting global styles  */
+@import 'variables';
+@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import url("https://use.typekit.net/gsl5pvl.css");
+@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
+
+body {
+  font-family: upgrade, sans-serif;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+section {
+  min-height: 100vh;
+}
