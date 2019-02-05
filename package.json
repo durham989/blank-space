@@ -1,7 +1,7 @@
 {
-  "name": "angular-starter",
-  "version": "7.5.0",
-  "description": "An Angular Webpack Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by Tipe.io",
+  "name": "blank-space",
+  "version": "0.0.1",
+  "description": "Blank Space Creative is a digital creative studio that helps companies shape and design their brand.",
   "keywords": [
     "angular",
     "angular2",
@@ -9,11 +9,11 @@
     "angular5",
     "webpack",
     "typescript",
-    "tipe",
-    "tipe.io"
+    "blank space",
+    "blank space creative"
   ],
-  "author": "Patrick Stapleton <patrick@tipe.io>",
-  "homepage": "https://github.com/gdi2290/angular-starter",
+  "author": "Ethan Durham <ethan@kasuriagroup.com>",
+  "homepage": "https://github.com/durham989/blank-space",
   "license": "MIT",
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 SOURCE_MAP=0 npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail",
