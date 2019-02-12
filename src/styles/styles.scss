@@ -9,6 +9,22 @@
 
 body {
   font-family: upgrade, sans-serif;
+	--background-color: #FFFFFF;
+	--background-color-2: #FFFFFF;
+  --background-color-3: #FFFFFF;
+	// --background-color: #EDFAFC;
+	// --background-color-2: #F4FCFD;
+	// --background-color-3: #f0fbfc;
+	--link-color: #adadad;
+	--link-hover-color: #999999;
+	font-weight: 500;
+	color: #000000;
+	color: var(--text-color);
+  background-color: #FFFFFF;
+  // background-color: #EDFAFC;
+	background-color: var(--background-color);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .text-align-left {

@@ -43,7 +43,7 @@ function startConnection() {
   });
 }
 
-// startConnection();
+startConnection();
 
 var app = express();
 // var consultation = require('./routes/consultation/consultation');

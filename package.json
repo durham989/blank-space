@@ -115,6 +115,8 @@
     "popper.js": "^1.14.6",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.1",
+    "scrollmonitor": "^1.2.4",
+    "simplex-noise": "^2.4.0",
     "three": "^0.100.0",
     "zone.js": "^0.8.26"
   },

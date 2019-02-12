@@ -1,14 +1,15 @@
 /*styles for home content only*/
 
 .home-background {
-  background-image: url("../../assets/img/Blank_Space_Blue_Background.png");
-  /* background-size: 100%; */
+  background-image: url("../../assets/img/Blank_Space_Blue_Background_4.png");
+  /* background-image: url("../../assets/img/Blank_Space_Blue_Background.png"); */
+  /* background-image: url("../../assets/img/Dotted_Background.svg"); */
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .services-background {
-  background-image: url("../../assets/img/Blank_Space_Background_2.png");
+  background-image: url("../../assets/img/blue-dots-background.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -29,6 +30,13 @@
   font-size : 30px;
   letter-spacing : 4.8px;
   color : #41465C;
+  font-family: upgrade-lights, sans-serif;
+}
+
+.blank-space-service-header {
+  font-size : 80px;
+  letter-spacing : 14.25px;
+  color : #000000;
   font-family: upgrade-lights, sans-serif;
 }
 
@@ -65,6 +73,28 @@
   text-align: left;
 }
 
+/* SVG Morph */
+.morph-wrap {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  pointer-events: none;
+  z-index: -1000;
+}
+
+.morph {
+	position: relative;
+	height: 100%;
+	fill: var(--background-color-2);
+	flex: none;
+}
+
 @-webkit-keyframes slide-in-right {
   0% {
     -webkit-transform: translateX(1000px);
@@ -87,5 +117,22 @@
     -webkit-transform: translateX(0);
             transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .blank-space-side-content {
+    transform: rotate(0deg);
+    --webkit-transform: rotate(0deg);
+    --moz-transform: rotate(0deg);
+    --ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    text-align: center;
+  }
+
+  .blank-space-service-header {
+    font-size: 30px;
+    letter-spacing : 8px;
+    font-family: upgrade-lights, sans-serif;
   }
 }
