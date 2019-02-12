@@ -73,6 +73,7 @@ webpack-cache
 # IDE #
 .idea/
 *.swp
+.env
 
 
 # Angular #

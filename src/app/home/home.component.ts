@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   public step: any;
   public svgWidth: any = window.screen.width;
   public svgHeight: any = window.screen.height;
-  public bString: any = "The letter b is the biggest letter in the alphabet";
 
   @ViewChild('blankSpace') blankSpaceElement: ElementRef;
   @ViewChild('backgroundSVG') backgroundSVGElement: ElementRef;
