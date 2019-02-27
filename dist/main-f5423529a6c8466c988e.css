@@ -9332,7 +9332,19 @@ a.text-dark:hover, a.text-dark:focus {
   visibility: hidden !important; }
 
 body {
-  font-family: upgrade, sans-serif; }
+  font-family: upgrade, sans-serif;
+  --background-color: #FFFFFF;
+  --background-color-2: #FFFFFF;
+  --background-color-3: #FFFFFF;
+  --link-color: #adadad;
+  --link-hover-color: #999999;
+  font-weight: 500;
+  color: #000000;
+  color: var(--text-color);
+  background-color: #FFFFFF;
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
 
 .text-align-left {
   text-align: left; }
@@ -9351,4 +9363,4 @@ section {
 
 
 
-/*# sourceMappingURL=main-39aebb66c2fb36356956.css.map*/
+/*# sourceMappingURL=main-f5423529a6c8466c988e.css.map*/
