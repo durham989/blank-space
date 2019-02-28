@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -20,6 +21,9 @@ import { HomeComponent } from './home';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 import { DevModuleModule } from './+dev-module';
+
+// Services
+import { ScrollService } from './services/scroll.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -57,6 +61,7 @@ interface StoreType {
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    ScrollToModule.forRoot(),
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
@@ -74,7 +79,8 @@ interface StoreType {
    */
   providers: [
     environment.ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    ScrollService
   ]
 })
 export class AppModule {}

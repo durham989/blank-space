@@ -6,6 +6,7 @@ import * as scrollMonitor from 'scrollmonitor';
 
 import { AppState } from '../app.service';
 import { Title } from './title';
+import { ScrollService } from '../services/scroll.service';
 
 @Component({
   selector: 'home',
@@ -26,51 +27,36 @@ export class HomeComponent implements OnInit {
   public step: any;
   public svgWidth: any = window.screen.width;
   public svgHeight: any = window.screen.height;
-
-  // THREE.JS variables
-  public separation: any = 40;
-  public amountX: any = 120;
-  public amountY: any = 35;
-  public container: any;
-  public camera: any;
-  public scene: any;
-  public renderer: any;
-  public particles: any = [];
-  public particle: any;
-  public count: any;
-  public windowHalfX: any;
-  public windowHalfY: any;
-  public material: any;
+  public newWidth: any;
+  public newHeight: any;
 
   @ViewChild('blankSpace') blankSpaceElement: ElementRef;
   @ViewChild('backgroundSVG') backgroundSVGElement: ElementRef;
 
   @HostListener('window:resize', ['$event'])
   onResize(event){
-    var newHeight = window.screen.height;
-    var newWidth = window.screen.width;
+    this.newHeight = window.screen.height;
+    this.newWidth = window.screen.width;
     
-    this.svgWidth = newWidth;
-    this.svgHeight = newHeight;
+    this.svgWidth = this.newWidth;
+    this.svgHeight = this.newHeight;
   }
 
   constructor(
     public appState: AppState,
-    public title: Title
+    public title: Title,
+    private scrollService: ScrollService,
   ) { }
 
   public ngOnInit() {
     console.log('hello `Home` component');
+    this.newHeight = window.screen.height;
+    this.newWidth = window.screen.width;
     this.brandingAnimation();
     // this.animateBackground();
     this.configureDOM();
     this.initializeMorphing();
     this.createScrollWatchers();
-    // this.threeInit();
-  }
-
-  ngAfterViewInit() {
-    // 
   }
 
   brandingAnimation() {
@@ -493,64 +479,9 @@ export class HomeComponent implements OnInit {
 		});
   }
 
-  threeInit() {
-    this.container = document.createElement('div');
-    document.body.appendChild(this.container);
-    if(this.container) {
-      this.container.className += this.container.className ? 'waves' : 'waves';
-    }
-
-    this.camera = new THREE.PerspectiveCamera(120, window.innerWidth / window.innerHeight, 1, 10000);
-    this.camera.position.y = 250;
-    this.camera.position.z = 300;
-    this.camera.rotation.x = 0.35;
-
-    this.scene = new THREE.Scene();
-    
-    var PI2 = Math.PI * 2;
-    this.material = new THREE.SpriteMaterial({
-      color: '#000000',
-      program: function(context) {
-        context.beginPath();
-        context.arc(0, 0, 0.1, 0, PI2, true);
-        context.fill();
-      }
-    });
-
-    var i = 0;
-    for(var ix = 0; ix < this.amountX; ix++) {
-      for (var iy = 0; iy < this.amountY; iy++) {
-        this.particle = this.particles[i++] = new THREE.Sprite(this.material);
-        this.particle.position.x = ix * this.separation - ((this.amountX * this.separation) / 2);
-        this.particle.position.z = iy * this.separation - ((this.amountY * this.separation) - 10);
-        this.scene.add(this.particle);
-      }
-    }
-
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0xffffff, 1);
-    this.container.appendChild(this.renderer.domElement);
-
-    this.animateThree();
-  }
-
-  animateThree() {
-    window.requestAnimationFrame(() => this.animateThree());
-    this.renderThree();
-  }
-
-  renderThree() {
-    var i = 0;
-    for(var ix = 0; ix < this.amountX; ix++) {
-      for(var iy = 0; iy < this.amountY; iy++) {
-        this.particle = this.particles[i++];
-        this.particle.position.y = (Math.sin((ix + this.count) * 0) * 20) + (Math.sin((iy + this.count) * 0.5) * 20);
-        this.particle.scale.x = this.particle.scale.y = (Math.sin((ix + this.count) * 0.3) + 2) * 4 + (Math.sin((iy + this.count) * 0.5) + 1) * 4;
-      }
-    }
-    this.renderer.render(this.scene, this.camera);
-    this.count += 0.2;
+  scrollToSection(section) {
+    console.log('scroll to: ' + section);
+    this.scrollService.triggerToScroll(section);
   }
 
   public submitState(value: string) {
