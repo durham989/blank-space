@@ -82,7 +82,7 @@ app.route('/contact').post((req, res) => {
   };
 
   const msg = {
-    to: ['ethan@kasuriagroup', 'porshs123@gmail.com', 'hello@blankspacecr.com'],
+    to: ['ethan@kasuriagroup.com', 'porshs123@gmail.com', 'hello@blankspacecr.com'],
     from: 'contact@blankspacecr.com',
     subject: 'Blank Space Contact Form Submission',
     html: `<p>The following individual just submitted a contact form on Blank Space:</p><p><ul><li>Name: ${leadName}</li><li>Email Address: ${leadEmailAddress}</li><li>Org Name: ${leadOrgName}</li><li>Area of Interest: ${leadAreaOfInterest}</li><li>Additional Message: ${leadMessage}</li></ul></p><p>Follow up with them ASAP!</p>`
