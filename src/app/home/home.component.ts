@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import anime, { random } from 'animejs';
 import * as $ from 'jquery';
 import * as THREE from 'three';
@@ -7,6 +8,7 @@ import * as scrollMonitor from 'scrollmonitor';
 import { AppState } from '../app.service';
 import { Title } from './title';
 import { ScrollService } from '../services/scroll.service';
+import { ContactService } from '../services/contact.service';
 
 @Component({
   selector: 'home',
@@ -29,6 +31,10 @@ export class HomeComponent implements OnInit {
   public svgHeight: any = window.screen.height;
   public newWidth: any;
   public newHeight: any;
+  public formStep: any = 1;
+  public contactForm: FormGroup;
+  public contactFormSubmitted: Boolean = false;
+  public contactSubmissionResults: any = [];
 
   @ViewChild('blankSpace') blankSpaceElement: ElementRef;
   @ViewChild('backgroundSVG') backgroundSVGElement: ElementRef;
@@ -46,7 +52,11 @@ export class HomeComponent implements OnInit {
     public appState: AppState,
     public title: Title,
     private scrollService: ScrollService,
-  ) { }
+    private formBuilder: FormBuilder,
+    private contactService: ContactService,
+  ) {
+    this.buildForms();
+  }
 
   public ngOnInit() {
     console.log('hello `Home` component');
@@ -57,6 +67,16 @@ export class HomeComponent implements OnInit {
     this.configureDOM();
     this.initializeMorphing();
     this.createScrollWatchers();
+  }
+
+  buildForms() {
+    this.contactForm = this.formBuilder.group({
+      name: [null, Validators.required],
+      organization: [null, Validators.required],
+      emailAddress: [null, Validators.required],
+      areaOfInterest: [null, Validators.required],
+      message: [null, Validators.required]
+    });
   }
 
   brandingAnimation() {
@@ -335,7 +355,32 @@ export class HomeComponent implements OnInit {
             easing: 'easeOutElastic'
           }
         }
-      }
+      },
+      {
+        path: 'M 262.9,252.2 C 210.1,338.2 212.6,487.6 288.8,553.9 372.2,626.5 511.2,517.8 620.3,536.3 750.6,558.4 860.3,723 987.3,686.5 1089,657.3 1168,534.7 1173,429.2 1178,313.7 1096,189.1 995.1,130.7 852.1,47.07 658.8,78.95 498.1,119.2 410.7,141.1 322.6,154.8 262.9,252.2 Z',
+        pathAlt: 'M 262.9,252.2 C 210.1,338.2 273.3,400.5 298.5,520 323.7,639.6 511.2,537.2 620.3,555.7 750.6,577.8 872.2,707.4 987.3,686.5 1102,665.6 1218,547.8 1173,429.2 1128,310.6 1096,189.1 995.1,130.7 852.1,47.07 658.8,78.95 498.1,119.2 410.7,141.1 322.6,154.8 262.9,252.2 Z',
+        scaleX: 2.4,
+        scaleY: 2.2,
+        rotate: 0,
+        tx: -30,
+        ty: -300,
+        fill: {
+          color: '#EDFAFC',
+          duration: 500,
+          easing: 'linear'
+        },
+        animation: {
+          path: {
+            duration: 3000,
+            easing: 'easeOutElastic',
+            elasticity: 600
+          },
+          svg: {
+            duration: 2000,
+            easing: 'easeOutElastic'
+          }
+        }
+      },
     ];
   }
 
@@ -482,6 +527,60 @@ export class HomeComponent implements OnInit {
   scrollToSection(section) {
     console.log('scroll to: ' + section);
     this.scrollService.triggerToScroll(section);
+  }
+
+  moveToNextFormStep(step) {
+    this.formStep = step;
+    console.log('formStep is: ' + this.formStep);
+  }
+
+  onInputEnter(field,value,step) {
+    switch (field) {
+      case 'name': 
+        this.contactForm.patchValue({
+          name: value
+        });
+        this.formStep = step;
+        break;
+      case 'organization': 
+        this.contactForm.patchValue({
+          organization: value
+        });
+        this.formStep = step;
+        break;
+      case 'emailAddress': 
+        this.contactForm.patchValue({
+          emailAddress: value
+        });
+        this.formStep = step;
+        break;
+      case 'areaOfInterest': 
+        this.contactForm.patchValue({
+          areaOfInterest: value
+        });
+        this.formStep = step;
+        break;
+      case 'message': 
+        this.contactForm.patchValue({
+          message: value
+        });
+        this.submitContactForm();
+        break;
+    }
+  }
+
+  submitContactForm() {
+    this.contactFormSubmitted = true;
+    this.contactService.submitContactForm(this.contactForm.value).subscribe(
+      data => {
+        this.contactSubmissionResults = data;
+        console.log('data is: ' + JSON.stringify(this.contactSubmissionResults));
+      },
+      error => {
+        console.error(error);
+        console.log(error.error.message);
+      }
+    );
   }
 
   public submitState(value: string) {

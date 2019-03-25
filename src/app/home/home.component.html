@@ -149,6 +149,77 @@
             <i class="fas fa-arrow-up active-arrow" (click)="scrollToSection('social-services-section')"></i>
           </div>
           <div class="py-2">
+            <i class="fas fa-arrow-down active-arrow" (click)="scrollToSection('contact-form-section')"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact-form-section">
+    <div class="container">
+      <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-lg-3"></div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <h1 class="text-align-center py-2">Want to Work With Us?</h1>
+          <form [formGroup]="contactForm" class="py-2" autocomplete="off" *ngIf="!contactFormSubmitted">
+            <div class="form-group" *ngIf="formStep == 1">
+              <label for="name">What's Your Name?</label>
+              <input #name id="name" type="text" class="contact-form-input" placeholder="Full Name" formControlName="name" (keyup.enter)="onInputEnter('name',name.value,2)">
+              <div class="submit-arrow cursor-pointer">
+                <i class="fas fa-long-arrow-alt-right cursor-pointer" (click)="moveToNextFormStep(2)"></i>
+              </div>
+              <div class="progress-bar" style="width: 20%"></div>
+            </div>
+            <div class="form-group" *ngIf="formStep == 2">
+              <label for="organization">What's Your Company's Name?</label>
+              <input #organization id="organization" type="text" class="contact-form-input" placeholder="Organization Name" formControlName="organization" (keyup.enter)="onInputEnter('organization',organization.value,3)">
+              <div class="submit-arrow cursor-pointer">
+                <i class="fas fa-long-arrow-alt-right cursor-pointer" (click)="moveToNextFormStep(3)"></i>
+              </div>
+              <div class="progress-bar" style="width: 40%"></div>
+            </div>
+            <div class="form-group" *ngIf="formStep == 3">
+              <label for="emailAddress">What's Your Email Address?</label>
+              <input #emailAddress id="emailAddress" type="email" class="contact-form-input" placeholder="Email Address" formControlName="emailAddress" (keyup.enter)="onInputEnter('emailAddress',emailAddress.value,4)">
+              <div class="submit-arrow cursor-pointer">
+                <i class="fas fa-long-arrow-alt-right cursor-pointer" (click)="moveToNextFormStep(4)"></i>
+              </div>
+              <div class="progress-bar" style="width: 60%"></div>
+            </div>
+            <div class="form-group" *ngIf="formStep == 4">
+              <label for="areaOfInterest">What Would You Like Help With?</label>
+              <input #areaOfInterest id="areaOfInterest" type="text" class="contact-form-input" placeholder="Area of Interest" formControlName="areaOfInterest" (keyup.enter)="onInputEnter('areaOfInterest',areaOfInterest.value,5)">
+              <div class="submit-arrow cursor-pointer">
+                <i class="fas fa-long-arrow-alt-right cursor-pointer" (click)="moveToNextFormStep(5)"></i>
+              </div>
+              <div class="progress-bar" style="width: 80%"></div>
+            </div>
+            <div class="form-group" *ngIf="formStep == 5">
+              <label for="messafe">Anything Else You'd Like to Add?</label>
+              <input #message id="message" type="text" class="contact-form-input" placeholder="Tell us about your goals!" formControlName="message" (keyup.enter)="onInputEnter('message',message.value,6)">
+              <div class="submit-arrow cursor-pointer">
+                <i class="fas fa-long-arrow-alt-right cursor-pointer" (click)="submitContactForm()"></i>
+              </div>
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+          </form>
+          <div class="pt-4 text-align-center" *ngIf="contactFormSubmitted">
+            <p>Thank you! We'll be in touch with you shortly!</p>
+          </div>
+          <div class="form-tracker" *ngIf="!contactFormSubmitted">
+            <p *ngIf="formStep == 1">1/5</p>
+            <p *ngIf="formStep == 2">2/5</p>
+            <p *ngIf="formStep == 3">3/5</p>
+            <p *ngIf="formStep == 4">4/5</p>
+            <p *ngIf="formStep == 5">5/5</p>
+          </div>
+        </div>
+        <div class="col-lg-3 text-align-center d-none d-sm-block">
+          <div class="py-2">
+            <i class="fas fa-arrow-up active-arrow" (click)="scrollToSection('event-services-section')"></i>
+          </div>
+          <div class="py-2">
             <i class="fas fa-arrow-down inactive-arrow"></i>
           </div>
         </div>

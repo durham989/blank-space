@@ -62,45 +62,46 @@ app.use(cors());
 // Set static folder
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Consultation form email
-// app.route('/consultation').post((req, res) => {
-//   const leadFirstName = req.body.consultFirstName;
-//   const leadLastName = req.body.consultLastName;
-//   const leadEmailAddress = req.body.consultEmailAddress;
-//   const leadOrgName = req.body.consultOrgName;
+// Contact form email
+app.route('/contact').post((req, res) => {
+  const leadName = req.body.name;
+  const leadEmailAddress = req.body.emailAddress;
+  const leadOrgName = req.body.organization;
+  const leadAreaOfInterest = req.body.areaOfInterest;
+  const leadMessage = req.body.message;
 
-//   var CURRENT_TIMESTAMP = { toSqlString: function() { return 'CURRENT_TIMESTAMP()'; } };
+  var CURRENT_TIMESTAMP = { toSqlString: function() { return 'CURRENT_TIMESTAMP()'; } };
 
-//   const consultationDBEntry = {
-//     firstName: leadFirstName,
-//     lastName: leadLastName,
-//     emailAddress: leadEmailAddress,
-//     orgName: leadOrgName,
-//     date: CURRENT_TIMESTAMP
-//   };
+  const contactDBEntry = {
+    name: leadName,
+    emailAddress: leadEmailAddress,
+    orgName: leadOrgName,
+    areaOfInterest: leadAreaOfInterest,
+    message: leadMessage,
+    date: CURRENT_TIMESTAMP
+  };
 
-//   const msg = {
-//     to: ['ethan@aqueduct.ai', 'jeff@aqueduct.ai'],
-//     // to: 'ethan@kasuriagroup.com',
-//     from: 'info@aqueduct.ai',
-//     subject: 'Aqueduct Consultation Submission',
-//     html: `<p>The following individual just submitted a consultation form on Aqueduct.ai:</p><p><ul><li>First Name: ${leadFirstName}</li><li>Last Name: ${leadLastName}</li><li>Email Address: ${leadEmailAddress}</li><li>Org Name: ${leadOrgName}</li></ul></p><p>Follow up with them ASAP!</p>`
-//   };
+  const msg = {
+    to: ['ethan@kasuriagroup', 'porshs123@gmail.com', 'hello@blankspacecr.com'],
+    from: 'contact@blankspacecr.com',
+    subject: 'Blank Space Contact Form Submission',
+    html: `<p>The following individual just submitted a contact form on Blank Space:</p><p><ul><li>Name: ${leadName}</li><li>Email Address: ${leadEmailAddress}</li><li>Org Name: ${leadOrgName}</li><li>Area of Interest: ${leadAreaOfInterest}</li><li>Additional Message: ${leadMessage}</li></ul></p><p>Follow up with them ASAP!</p>`
+  };
 
-//   return sgMail.send(msg)
+  return sgMail.send(msg)
 
-//     .then(() => connection.query('INSERT INTO consultations SET ?', consultationDBEntry, function (error, results) {
-//       if (error) throw error;
-//       if (results) {
-//         console.log('results of database entry are: ' + results);
-//       }
-//     }))
-//     .then(() => res.status(200).json({
-//       message: 'email sent!'
-//     }))
-//     .catch(() => res.status(400).send(err))
+    .then(() => connection.query('INSERT INTO contact_form SET ?', contactDBEntry, function (error, results) {
+      if (error) throw error;
+      if (results) {
+        console.log('results of database entry are: ' + results);
+      }
+    }))
+    .then(() => res.status(200).json({
+      message: 'email sent!'
+    }))
+    .catch(() => res.status(400).send(err))
 
-// });
+});
 
 // Blog Subscription 
 app.route('/subscribe').post(function (req, res) {

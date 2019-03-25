@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +24,7 @@ import { DevModuleModule } from './+dev-module';
 
 // Services
 import { ScrollService } from './services/scroll.service';
+import { ContactService } from './services/contact.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -60,6 +61,7 @@ interface StoreType {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ScrollToModule.forRoot(),
     RouterModule.forRoot(ROUTES, {
@@ -80,7 +82,8 @@ interface StoreType {
   providers: [
     environment.ENV_PROVIDERS,
     APP_PROVIDERS,
-    ScrollService
+    ScrollService,
+    ContactService,
   ]
 })
 export class AppModule {}
